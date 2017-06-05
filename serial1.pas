@@ -14,18 +14,15 @@ type
 
    TForm1 = class(TForm)
 			BtnLoad: TButton;
-			Button1: TButton;
 			BtnSave: TButton;
-			Edit1: TEdit;
+			Button1: TButton;
 			OpenDialog1: TOpenDialog;
 			SaveDialog1: TSaveDialog;
 			StringGrid1: TStringGrid;
 			procedure BtnLoadClick(Sender: TObject);
    procedure BtnSaveClick(Sender: TObject);
-   			procedure Button1Click(Sender: TObject);
+   procedure Button1Click(Sender: TObject);
 			procedure FormCreate(Sender: TObject);
-			procedure StringGrid1StartDrag(Sender: TObject;
-				  var DragObject: TDragObject);
 			procedure StringGrid1ValidateEntry(sender: TObject; aCol,
 				  aRow: Integer; const OldValue: string; var NewValue: String);
 	  private
@@ -40,33 +37,16 @@ var
       rowSize:integer = 5;
 
 implementation
-
+ uses grafico;
 {$R *.lfm}
 
 { TForm1 }
-
-procedure TForm1.Button1Click(Sender: TObject);
-var
-      columNumber:Integer;
-begin
-      if TryStrToInt(Edit1.text,columNumber)then
-        begin
-            StringGrid1.ColCount:=columNumber+1;
-		end;
-	End;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
       rowSize:=StringGrid1.RowCount;
       columSize:=StringGrid1.ColCount;
 end;
-
-procedure TForm1.StringGrid1StartDrag(Sender: TObject;
-	  var DragObject: TDragObject);
-begin
-
-end;
-
 procedure TForm1.BtnSaveClick(Sender: TObject);
 begin
       if SaveDialog1.Execute then
@@ -75,12 +55,33 @@ begin
 		end;
 end;
 
+procedure TForm1.Button1Click(Sender: TObject);
+var xyArray,xsqrArray:array of Double;
+      x,y:Double;
+      i:integer;
+      arraysize:integer=0;
+begin
+      Form2.Chart1LineSeries1.Clear;
+      for I:=0 to rowSize-1 do
+      begin
+         if(TryStrToFloat(StringGrid1.Cells[1,i],x)) AND (TryStrToFloat(StringGrid1.Cells[2,i],y)) then
+           begin
+             arraysize:=arraysize+1;
+             SetLength(xyArray,arraysize);
+             xsqrArray[arraysize-1] := x*x;
+             xyArray[arraysize-1] := x*y;
+		   end;
+	  end;
+
+      //Form2.Chart1LineSeries1.AddArray(xyArray);
+      Form2.Show;
+end;
+
 procedure TForm1.BtnLoadClick(Sender: TObject);
 begin
       if OpenDialog1.Execute then
         begin
-	      	StringGrid1.LoadFromCSVFile(OpenDialog1.FileName,';');
-
+            StringGrid1.LoadFromCSVFile(OpenDialog1.FileName,';');
 		end;
 
 end;
@@ -88,7 +89,12 @@ end;
 
 procedure TForm1.StringGrid1ValidateEntry(sender: TObject; aCol, aRow: Integer;
 	  const OldValue: string; var NewValue: String);
+var tempFloat:Double;
 begin
+    if (TryStrToFloat(NewValue,tempFloat))then
+      StringGrid1.Cells[aCol,aRow]:=NewValue
+    else
+    	StringGrid1.Cells[aCol,aRow]:= OldValue;
     if(aRow = StringGrid1.RowCount-1) then
       begin
         rowSize:= rowSize + 10;

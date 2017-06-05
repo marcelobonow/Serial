@@ -5,8 +5,8 @@ unit grafico;
 interface
 
 uses
-	  Classes, SysUtils, FileUtil, TASources, TAStyles, TAGraph, Forms, Controls,
-	  Graphics, Dialogs;
+	  Classes, SysUtils, FileUtil, TASources, TAStyles, TAGraph, TASeries, Forms,
+	  Controls, Graphics, Dialogs;
 
 type
 
@@ -14,6 +14,8 @@ type
 
    TForm2 = class(TForm)
 			Chart1: TChart;
+			Chart1LineSeries1: TLineSeries;
+			procedure FormCreate(Sender: TObject);
 	  private
 			{ private declarations }
 	  public
@@ -26,6 +28,12 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TForm2 }
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+end;
 
 end.
 

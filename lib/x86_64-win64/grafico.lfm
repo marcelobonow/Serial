@@ -7,6 +7,7 @@ object Form2: TForm2
   ClientHeight = 598
   ClientWidth = 666
   Color = clWhite
+  OnCreate = FormCreate
   LCLVersion = '1.6.4.0'
   object Chart1: TChart
     Left = 0
@@ -16,6 +17,7 @@ object Form2: TForm2
     AxisList = <    
       item
         Minors = <>
+        Position = -1
         Title.LabelFont.Orientation = 900
       end    
       item
@@ -32,5 +34,8 @@ object Form2: TForm2
     )
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clSilver
+    object Chart1LineSeries1: TLineSeries
+      ShowPoints = True
+    end
   end
 end

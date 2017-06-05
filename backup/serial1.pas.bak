@@ -35,6 +35,7 @@ var
 	  Form1: TForm1;
       columSize:integer = 5;
       rowSize:integer = 5;
+      a,b:double;
 
 implementation
  uses grafico;
@@ -56,9 +57,10 @@ begin
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
-var xyArray,xsqrArray:array of Double;
+var xySum,xsqrSum:Real;
       x,y:Double;
       i:integer;
+      xSum,ySum:double;
       arraysize:integer=0;
 begin
       Form2.Chart1LineSeries1.Clear;
@@ -67,13 +69,21 @@ begin
          if(TryStrToFloat(StringGrid1.Cells[1,i],x)) AND (TryStrToFloat(StringGrid1.Cells[2,i],y)) then
            begin
              arraysize:=arraysize+1;
-             SetLength(xyArray,arraysize);
-             xyArray[arraysize-1] := x*y;
-		   end;
+             xsqrSum := xsqrSum + x*x;
+             xySum:= xySum + x*y;
+             xsum:=xsum+x;
+             ysum:=ysum+y;
+             Form2.Chart1LineSeries1.AddXY(x,y,'',clRed);
+	  	end;
 	  end;
-
+      if(arraysize>1)then
+        begin
+      	a:=(arraysize*xySum-(xsum*ySum))/((arraysize*xsqrSum-(xSum*xSum)));
+        b:=(ySum-a*xSum)/arraysize;
+        ShowMessage('a: ' + FloatToStr(a) + ' b: ' + FloatToStr(b));
+        Form2.Show;
+		end;
       //Form2.Chart1LineSeries1.AddArray(xyArray);
-      Form2.Show;
 end;
 
 procedure TForm1.BtnLoadClick(Sender: TObject);
@@ -96,7 +106,7 @@ begin
     	StringGrid1.Cells[aCol,aRow]:= OldValue;
     if(aRow = StringGrid1.RowCount-1) then
       begin
-        rowSize:= rowSize + 10;
+        rowSize:= rowSize + 1;
       	StringGrid1.RowCount:=rowSize;
 	  end;
 

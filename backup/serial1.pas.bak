@@ -60,30 +60,72 @@ procedure TForm1.Button1Click(Sender: TObject);
 var xySum,xsqrSum:Real;
       x,y:Double;
       i:integer;
+      o:integer;
       xSum,ySum:double;
       arraysize:integer=0;
+      chartArray:array [0..3] of TLineSeries;
+      labelEquation:array[0..3] of TLabel;
+      labelhysteresis:array[0..3] of TLabel;
+      labelprecision:array[0..3] of TLabel;
+      maxDiference1:real;
+      maxDiference2:real;
+      NextCollum:real;
+      FSO:real;
+
+
 begin
       Form2.Chart1LineSeries1.Clear;
-      for I:=0 to rowSize-1 do
+      chartArray[0] := Form2.Chart1LineSeries1;
+      chartArray[1] := Form2.Chart1LineSeries2;
+      chartArray[2] := Form2.Chart1LineSeries3;
+      chartArray[3] := Form2.Chart1LineSeries4;
+      labelEquation[0] := Form2.LblEq1;
+      labelEquation[1] := Form2.LblEq2;
+      labelEquation[2] := Form2.LblEq3;
+      labelEquation[3] := Form2.LblEq4;
+      //escolher a cor das linhas
+      if(TryStrToFloat(StringGrid1.Cells[1,rowSize-1],FSO)) then
+      else
+      	ShowMessage('Valores do eixo x não reconhecidos');
+      for o:= 2 to 5 do
       begin
-         if(TryStrToFloat(StringGrid1.Cells[1,i],x)) AND (TryStrToFloat(StringGrid1.Cells[2,i],y)) then
-           begin
-             arraysize:=arraysize+1;
-             xsqrSum := xsqrSum + x*x;
-             xySum:= xySum + x*y;
-             xsum:=xsum+x;
-             ysum:=ysum+y;
-             Form2.Chart1LineSeries1.AddXY(x,y,'',clRed);
-	  	end;
+	        for I:=0 to rowSize-1 do
+	        begin
+	           if(TryStrToFloat(StringGrid1.Cells[1,i],x)) AND (TryStrToFloat(StringGrid1.Cells[o,i],y)) then
+	             begin
+	               arraysize:=arraysize+1;
+	               xsqrSum := xsqrSum + x*x;
+	               xySum:= xySum + x*y;
+	               xsum:=xsum+x;
+	               ysum:=ysum+y;
+	               chartArray[o-2].AddXY(x,y,'',clRed);
+                   if(o mod 2 = 0) then
+                     begin
+                      if(TryStrToFloat(StringGrid1.Cells[o+1,i],NextCollum)) then
+                         begin
+                           if(NextCollum - y > maxDiference1) and (o=2) then
+                              begin
+							 	maxDiference1:= NextCollum-y;
+							  end;
+						   if(NextCollum - y > maxDiference2) and (o=4) then
+                              begin
+							 	maxDiference2:= NextCollum-y;
+							  end;
+						 end;
+					 end;
+
+			  end;
+		    end;
+	        if(arraysize>1)then
+	          begin
+	      	  a:=(arraysize*xySum-(xsum*ySum))/((arraysize*xsqrSum-(xSum*xSum)));
+	          b:=(ySum-a*xSum)/arraysize;
+              Form2.LblHis.Caption := FloatToStr(maxDiference1/fso*300*100)+'%';
+              Form2.LblHis2.Caption := FloatToStr(maxDiference2/fso*300*100)+'%';
+              labelEquation[o-2].Caption:= 'Equação ' + IntToStr(o-1) + ': ' + 'a: ' + FormatFloat('0.###',a) + ' b: ' + FormatFloat('0.###',b);
+	          Form2.Show;
+			  end;
 	  end;
-      if(arraysize>1)then
-        begin
-      	a:=(arraysize*xySum-(xsum*ySum))/((arraysize*xsqrSum-(xSum*xSum)));
-        b:=(ySum-a*xSum)/arraysize;
-        ShowMessage('a: ' + FloatToStr(a) + ' b: ' + FloatToStr(b));
-        Form2.Show;
-		end;
-      //Form2.Chart1LineSeries1.AddArray(xyArray);
 end;
 
 procedure TForm1.BtnLoadClick(Sender: TObject);

@@ -1,19 +1,19 @@
 object Form2: TForm2
-  Left = 1787
-  Height = 601
-  Top = 150
+  Left = 1148
+  Height = 746
+  Top = 84
   Width = 676
   Caption = 'Instrumentação - Gráfico'
-  ClientHeight = 601
+  ClientHeight = 746
   ClientWidth = 676
   Color = clWhite
   OnCreate = FormCreate
   LCLVersion = '1.6.4.0'
   object Chart1: TChart
-    Left = 0
+    Left = -8
     Height = 568
-    Top = 32
-    Width = 676
+    Top = 33
+    Width = 684
     AxisList = <    
       item
         Minors = <>
@@ -22,7 +22,6 @@ object Form2: TForm2
       item
         Alignment = calBottom
         Minors = <>
-        Range.UseMin = True
       end>
     Extent.UseXMin = True
     Foot.Brush.Color = clBtnFace
@@ -34,7 +33,67 @@ object Form2: TForm2
       'TAChart'
     )
     object Chart1LineSeries1: TLineSeries
+      LinePen.Color = clRed
       ShowPoints = True
     end
+    object Chart1LineSeries2: TLineSeries
+      LinePen.Color = clLime
+      ShowPoints = True
+    end
+    object Chart1LineSeries3: TLineSeries
+      LinePen.Color = clYellow
+      ShowPoints = True
+    end
+    object Chart1LineSeries4: TLineSeries
+      ShowPoints = True
+    end
+  end
+  object LblEq1: TLabel
+    Left = 16
+    Height = 20
+    Top = 616
+    Width = 45
+    Caption = 'LblEq1'
+    ParentColor = False
+  end
+  object LblEq2: TLabel
+    Left = 176
+    Height = 20
+    Top = 616
+    Width = 45
+    Caption = 'LblEq2'
+    ParentColor = False
+  end
+  object LblEq3: TLabel
+    Left = 336
+    Height = 20
+    Top = 616
+    Width = 45
+    Caption = 'LblEq3'
+    ParentColor = False
+  end
+  object LblEq4: TLabel
+    Left = 512
+    Height = 20
+    Top = 616
+    Width = 45
+    Caption = 'LblEq4'
+    ParentColor = False
+  end
+  object LblHis: TLabel
+    Left = 72
+    Height = 20
+    Top = 677
+    Width = 41
+    Caption = 'LblHis'
+    ParentColor = False
+  end
+  object LblHis2: TLabel
+    Left = 320
+    Height = 20
+    Top = 672
+    Width = 49
+    Caption = 'LblHis2'
+    ParentColor = False
   end
 end

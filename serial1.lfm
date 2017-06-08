@@ -1,34 +1,36 @@
 object Form1: TForm1
-  Left = 444
-  Height = 722
-  Top = 135
-  Width = 547
+  Left = 413
+  Height = 746
+  Top = 129
+  Width = 536
   Caption = 'Instrumentação - Calcular Valores'
-  ClientHeight = 722
-  ClientWidth = 547
+  ClientHeight = 746
+  ClientWidth = 536
   Color = 9405052
   OnCreate = FormCreate
   LCLVersion = '1.6.4.0'
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 690
-    Top = 32
-    Width = 720
+    Height = 706
+    Top = 40
+    Width = 536
     AlternateColor = clInactiveBorder
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ColCount = 7
+    ColCount = 6
     Columns = <    
       item
         Alignment = taCenter
         Font.Color = clBlack
         Font.Height = -13
+        Layout = tlCenter
         Title.Alignment = taCenter
         Title.Color = clHotLight
         Title.Font.CharSet = ANSI_CHARSET
-        Title.Font.Height = -30
+        Title.Font.Height = -27
         Title.Font.Name = 'Arial Narrow'
         Title.Font.Pitch = fpVariable
         Title.Font.Quality = fqDraft
+        Title.Layout = tlCenter
         Title.Caption = 'X1'
         Width = 150
       end    
@@ -36,53 +38,46 @@ object Form1: TForm1
         Alignment = taCenter
         Font.Color = clBlack
         Font.Height = -13
+        Layout = tlCenter
         Title.Alignment = taCenter
         Title.Color = clHotLight
         Title.Font.CharSet = ANSI_CHARSET
-        Title.Font.Height = -30
+        Title.Font.Height = -27
         Title.Font.Name = 'Arial Narrow'
         Title.Font.Pitch = fpVariable
         Title.Font.Quality = fqDraft
+        Title.Layout = tlCenter
         Title.Caption = 'Y1'
         Width = 150
       end    
       item
         Font.Color = clBlack
         Font.Height = -13
+        Layout = tlCenter
         Title.Alignment = taCenter
         Title.Color = clHotLight
         Title.Font.CharSet = ANSI_CHARSET
-        Title.Font.Height = -30
+        Title.Font.Height = -27
         Title.Font.Name = 'Arial Narrow'
         Title.Font.Pitch = fpVariable
         Title.Font.Quality = fqDraft
-        Title.Caption = 'X2'
-        Width = 150
-      end    
-      item
-        Font.Color = clBlack
-        Font.Height = -13
-        Title.Alignment = taCenter
-        Title.Color = clHotLight
-        Title.Font.CharSet = ANSI_CHARSET
-        Title.Font.Height = -30
-        Title.Font.Name = 'Arial Narrow'
-        Title.Font.Pitch = fpVariable
-        Title.Font.Quality = fqDraft
+        Title.Layout = tlCenter
         Title.Caption = 'Y2'
         Width = 150
       end    
       item
         Font.Color = clBlack
         Font.Height = -13
+        Layout = tlCenter
         Title.Alignment = taCenter
         Title.Color = clHotLight
         Title.Font.CharSet = ANSI_CHARSET
-        Title.Font.Height = -30
+        Title.Font.Height = -27
         Title.Font.Name = 'Arial Narrow'
         Title.Font.Pitch = fpVariable
         Title.Font.Quality = fqDraft
-        Title.Caption = 'X3'
+        Title.Layout = tlCenter
+        Title.Caption = 'Y3'
         Width = 150
       end    
       item
@@ -90,12 +85,10 @@ object Form1: TForm1
         Font.Height = -13
         Title.Alignment = taCenter
         Title.Color = clHotLight
-        Title.Font.CharSet = ANSI_CHARSET
-        Title.Font.Height = -30
-        Title.Font.Name = 'Arial Narrow'
-        Title.Font.Pitch = fpVariable
-        Title.Font.Quality = fqDraft
-        Title.Caption = 'Y3'
+        Title.Font.Height = -27
+        Title.Font.Name = 'StringGrid'
+        Title.Layout = tlCenter
+        Title.Caption = 'Y4'
         Width = 150
       end>
     FixedColor = 9405052
@@ -104,13 +97,13 @@ object Form1: TForm1
     HeaderHotZones = []
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goRowSizing, goColSizing, goColMoving, goEditing, goAutoAddRows, goTabs, goColSpanning, goDblClickAutoSize, goSmoothScroll, goFixedRowNumbering, goScrollKeepVisible, goCellEllipsis]
     ParentFont = False
+    RowCount = 32
     TabOrder = 0
     TitleFont.Color = clBackground
     TitleFont.Name = 'StringGrid'
     OnValidateEntry = StringGrid1ValidateEntry
     ColWidths = (
       64
-      150
       150
       150
       150
@@ -141,18 +134,19 @@ object Form1: TForm1
     TabOrder = 2
   end
   object Button1: TButton
-    Left = 272
+    Left = 429
     Height = 25
     Top = 5
     Width = 100
-    Caption = 'Button1'
+    Anchors = [akTop, akRight]
+    Caption = 'Gráfico'
     OnClick = Button1Click
     TabOrder = 3
   end
   object SaveDialog1: TSaveDialog
-    left = 692
+    left = 260
   end
   object OpenDialog1: TOpenDialog
-    left = 664
+    left = 232
   end
 end
